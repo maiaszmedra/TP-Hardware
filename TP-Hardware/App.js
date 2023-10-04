@@ -1,12 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import About from './About.js';
+import QRScanner from './QRScanner.js';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
+import { AuthProvider } from './context/index.js';
+import { ContextProvider } from "./contextState";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ContextProvider>
+      <AuthProvider>
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="About" 
+          component={About} 
+        />
+        <Stack.Screen 
+          name="QRScanner" 
+          component={QRScanner} 
+        />
+      
+      </Stack.Navigator>
+    </NavigationContainer>
+    </AuthProvider>
+    </ContextProvider>
+    
   );
 }
 
