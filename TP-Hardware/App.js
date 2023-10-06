@@ -22,6 +22,10 @@ export default function App() {
       <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
+          name="Clima" 
+          component={Clima} 
+        />
+        <Stack.Screen 
           name="About" 
           component={About} 
         />
@@ -29,10 +33,7 @@ export default function App() {
           name="QRScanner" 
           component={QRScanner} 
         />
-        <Stack.Screen 
-          name="Clima" 
-          component={Clima} 
-        />
+        
       </Stack.Navigator>
     </NavigationContainer>
     

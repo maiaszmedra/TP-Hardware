@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Modal, Pressable} from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { CurrentRenderContext } from "@react-navigation/native";
 
@@ -16,12 +16,33 @@ export default function QRScanner({ navigation }) {
   const [text, setText] = useState("Not yet scanned");
   const [qrscan, setQrscan] = useState("No result");
   const [scanResults, setScanResults] = useState([]);
-
+  const [modalVisible, setModalVisible] = useState(false);
   
   //=========================================== ABRIR CAMARA ===========================================
 
   const onQRCodeRead = (e) => {
     //MostrarModal();
+    return(
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    )
   };
 
   const askForCameraPermission = () => {
@@ -99,5 +120,46 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     backgroundColor: "#F3E9DC",
     borderRadius: "25px",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
