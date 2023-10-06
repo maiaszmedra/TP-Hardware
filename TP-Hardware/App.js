@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import About from './About.js';
 import QRScanner from './QRScanner.js';
+import Clima from './Clima.js';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -13,15 +14,11 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { AuthProvider } from './context/index.js';
-import { ContextProvider } from "./contextState";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <ContextProvider>
-      <AuthProvider>
       <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
@@ -32,11 +29,12 @@ export default function App() {
           name="QRScanner" 
           component={QRScanner} 
         />
-      
+        <Stack.Screen 
+          name="Clima" 
+          component={Clima} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
-    </AuthProvider>
-    </ContextProvider>
     
   );
 }

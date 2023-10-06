@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { CurrentRenderContext } from "@react-navigation/native";
-import axios from "axios";
 
 // npm install react-native-camera react-native-qrcode-scanner
 // import { RNCamera } from 'react-native-camera'
@@ -30,7 +29,7 @@ export default function QRScanner({ navigation }) {
   };
 
   useEffect(() => {
-    fetchData(1, 1, 0, new Date(), 0);
+    
     BarCodeScanner.requestPermissionsAsync()
       .then((res) => {
         console.log(res);
@@ -93,10 +92,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#469735",
   },
   escanea: {
-    color: "#FFFFFF",
-    width: 200,
+    textAlign: "center",
+    color: "#C08552",
+    padding: 10,
     margin: -85,
-    fontWeight: 600,
-    backgroundColor: "#479A50",
+    fontWeight: "bold",
+    backgroundColor: "#F3E9DC",
+    borderRadius: "25px",
   },
 });

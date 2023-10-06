@@ -13,16 +13,10 @@ import QRCode from "react-qr-code";
 export default function About({navigation}) {
   return (
     <View style={styles.container}>
-    <QRCode
-        size={400}
-        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-        value={`{\"nombres\": Tami Schnaiderman y Maia Szmedra`}
-        viewBox={`0 0 256 256`}
-        fgColor="#895737"
-    />
+   
     <TouchableOpacity
     style={styles.button}
-    onPress={() => {navigation.navigate('QRScanner');}}
+    onPress={() => {navigation.navigate('');}}
     >
         <Text>Escanear</Text>
     </TouchableOpacity>
@@ -33,7 +27,7 @@ export default function About({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F3E9DC',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -50,6 +44,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 10,
-    backgroundColor: "#F3E9DC",
+    backgroundColor: "#DAB49D",
   },
 });
