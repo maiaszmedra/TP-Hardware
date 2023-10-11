@@ -15,6 +15,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+//https://coolors.co/4c5760-93a8ac-d7ceb2-fffaed-66635b
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

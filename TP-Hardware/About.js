@@ -16,9 +16,9 @@ export default function About({navigation}) {
     <QRCode
         size={300}
         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-        value={`{\"Tami Schnaiderman y Maia Szmedra\"`}
+        value={`{\"Autores\": \"Tami Schnaiderman y Maia Szmedra\"}`}
         viewBox={`0 0 256 256`}
-        fgColor="#895737"
+        fgColor="#4C5760"
     />
     <TouchableOpacity
     style={styles.button}
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 10,
-    backgroundColor: "#F3E9DC",
+    backgroundColor: "#D7CEB2",
   },
 });

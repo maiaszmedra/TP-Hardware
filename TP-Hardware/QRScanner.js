@@ -21,9 +21,8 @@ export default function QRScanner({ navigation }) {
   //=========================================== ABRIR CAMARA ===========================================
 
   const onQRCodeRead = (e) => {
-    //MostrarModal();
-    return(
-      <Modal
+    console.log("escaneado")
+      /*<Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -41,8 +40,7 @@ export default function QRScanner({ navigation }) {
             </Pressable>
           </View>
         </View>
-      </Modal>
-    )
+      </Modal>*/
   };
 
   const askForCameraPermission = () => {
@@ -72,8 +70,6 @@ export default function QRScanner({ navigation }) {
     setNombres(obj.nombres);
 
   };
-
- //============================ MODAL =========================================
 
   //============== RETURN =====================================================
 
@@ -114,11 +110,11 @@ const styles = StyleSheet.create({
   },
   escanea: {
     textAlign: "center",
-    color: "#C08552",
+    color: "#FFFAED",
     padding: 10,
     margin: -85,
     fontWeight: "bold",
-    backgroundColor: "#F3E9DC",
+    backgroundColor: "#93A8AC",
     borderRadius: "25px",
   },
   centeredView: {

@@ -16,7 +16,9 @@ import axios from "axios"
 export default function Clima({ navigation }) {
 const [location, setLocation] = useState(null);
 const [errorMsg, setErrorMsg] = useState(null);
-const [temperature, setTemperature] = useState(0);
+const [temperature, setTemperature] = useState();
+const [ubi, setUbi] = useState();
+const [date, detDate]= useState(new Date().toLocaleString())
 
 useEffect(() => {
     //get location
@@ -37,10 +39,11 @@ useEffect(() => {
     if(!location){
         return
     }
-    const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=0cd4c845628a93ee3dd46acea3646046`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&APPID=0cd4c845628a93ee3dd46acea3646046&units=metric`;
+    console.log(location.coords.latitude);
     axios.get(apiUrl).then((response) => {
-      setTemperature(response.data.current.temp);
-      console.log(temperature);
+      setTemperature(response.data.main.temp);
+      setUbi(response.data.name);
     });
   }, [location]);
 
@@ -53,14 +56,17 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.paragraph}>{text}</Text>
+      {/*<Text style={styles.paragraph}>{text}</Text>*/}
+      <Text style={styles.text}> {ubi} </Text>
+      <Text style={styles.text}> {date} </Text>
+      <Text style={styles.text}>Local temperature is {temperature} degrees</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
           navigation.navigate("About");
         }}
       >
-        <Text>Go to About</Text>
+        <Text style={styles.btnText}>Go to About</Text>
       </TouchableOpacity>
     </View>
   );
@@ -69,7 +75,7 @@ useEffect(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F3E9DC",
+    backgroundColor: "#FFFAED",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -86,6 +92,16 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 10,
-    backgroundColor: "#DAB49D",
+    backgroundColor: "#93A8AC",
   },
+  btnText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "#FFFAED",
+  },
+  text: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "#4C5760",
+  }
 });
