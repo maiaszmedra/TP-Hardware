@@ -21,26 +21,8 @@ export default function QRScanner({ navigation }) {
   //=========================================== ABRIR CAMARA ===========================================
 
   const onQRCodeRead = (e) => {
-    console.log("escaneado")
-      /*<Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>*/
+    console.log("holu")
+    
   };
 
   const askForCameraPermission = () => {
@@ -64,11 +46,13 @@ export default function QRScanner({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    onQRCodeRead
     setScanned(true);
     setText(data);
     const obj = JSON.parse(data);
-    setNombres(obj.nombres);
-
+    setNombres(obj.Autores);
+    console.log(obj.Autores)
+      
   };
 
   //============== RETURN =====================================================
@@ -90,7 +74,31 @@ export default function QRScanner({ navigation }) {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
-        <Text style={styles.escanea}>Escanea el codigo QR</Text>
+        
+        {nombres 
+        ? 
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>{nombres}</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+        : 
+        <Text style={styles.escanea}>Escanea el codigo QR</Text>}
+
       </View>
     );
   }
