@@ -10,11 +10,36 @@ import {
 } from "react-native";
 import React, { useRef, useState, useEffect } from "react";
 import { Video, ResizeMode } from 'expo-av';
+import {AsyncStorage} from 'react-native';
 
 export default function VideoFav({ navigation }) {
   const [input, setInput] = useState();
   const video = useRef(null);
   const [status, setStatus] = useState({});
+  const [item, setItem] = useState();
+
+  storeData = async () => {
+    try {
+      await AsyncStorage.setItem(
+        '@MySuperStore:key',
+        'I like to save it.',
+      );
+    } catch (error) {
+      // Error saving data
+    }
+  };
+
+  retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('recientes');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -25,37 +50,20 @@ export default function VideoFav({ navigation }) {
         placeholderTextColor="#000"
         onChangeText={(input) => setInput(input)}
       />
-      <Text>video</Text>
-      <Video
+      <View style={styles.videoView}>
+        <Video
         ref={video}
+        videoStyle={{position: 'none'}}
         style={styles.video}
         source={{
-          uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-        }}
-        useNativeControls
-        resizeMode={"contain"}
-        isLooping
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
-      />
-      <Text>video</Text>
-    {input
-    ?
-    //video
-    <Video
-        ref={video}
-        style={styles.video}
-        source={{
-          uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+          uri: input || 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
         }}
         useNativeControls
         resizeMode={ResizeMode.CONTAIN}
         isLooping
         onPlaybackStatusUpdate={status => setStatus(() => status)}
-      />
-    : <Text>Aca iría tu video</Text>
-}
-
-
+        />
+      </View>
 
       <TouchableOpacity
         style={styles.button}
@@ -111,10 +119,13 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     placeholderTextColor: "gray",
   },
-  video: {
-    resizeMode: 'contain',
+  videoView:{
     width: "80%",
-    height: "100px",
-    position: "static",
+  },
+  video: {
+    width: "100%",
+    height: "100%",
+    resizeMode: 'contain',
+    position: "relative",
   }
 });
