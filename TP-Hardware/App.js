@@ -14,6 +14,7 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import VideoFav from './VideoFav.js';
 
 //https://coolors.co/4c5760-93a8ac-d7ceb2-fffaed-66635b
 
@@ -23,6 +24,10 @@ export default function App() {
   return (
       <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen 
+          name="VideoFav" 
+          component={VideoFav} 
+        />
         <Stack.Screen 
           name="Clima" 
           component={Clima} 

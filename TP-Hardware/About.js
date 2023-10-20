@@ -16,7 +16,7 @@ export default function About({navigation}) {
     <QRCode
         size={300}
         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-        value={`{\"Autores\": \"Tami Schnaiderman y Maia Szmedra\"}`}
+        value={`Tami Schnaiderman y Maia Szmedra`}
         viewBox={`0 0 256 256`}
         fgColor="#4C5760"
     />

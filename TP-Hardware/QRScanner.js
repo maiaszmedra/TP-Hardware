@@ -21,7 +21,6 @@ export default function QRScanner({ navigation }) {
   //=========================================== ABRIR CAMARA ===========================================
 
   const onQRCodeRead = (e) => {
-    console.log("holu")
     
   };
 
@@ -49,9 +48,9 @@ export default function QRScanner({ navigation }) {
     onQRCodeRead
     setScanned(true);
     setText(data);
-    const obj = JSON.parse(data);
-    setNombres(obj.Autores);
-    console.log(obj.Autores)
+    const obj = data;
+    setNombres(obj);
+    console.log(obj)
       
   };
 
@@ -74,30 +73,10 @@ export default function QRScanner({ navigation }) {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
-        
-        {nombres 
-        ? 
-        <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>{nombres}</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-        : 
+
+        {nombres ? <Text style={styles.autores}>Los autores del codigo escaneado son: {nombres}</Text>: 
         <Text style={styles.escanea}>Escanea el codigo QR</Text>}
+       
 
       </View>
     );
@@ -108,6 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 200,
+    borderRadius: 100000,
   },
   cameraContainer: {
     flex: 1,
@@ -123,7 +103,16 @@ const styles = StyleSheet.create({
     margin: -85,
     fontWeight: "bold",
     backgroundColor: "#93A8AC",
-    borderRadius: "25px",
+    borderRadius: 20000000,
+  },
+  autores: {
+    textAlign: "center",
+    color: "#FFFAED",
+    padding: 10,
+    margin: -85,
+    fontWeight: "bold",
+    backgroundColor: "#93A8AC",
+    borderRadius:10000000,
   },
   centeredView: {
     flex: 1,
