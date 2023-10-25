@@ -10,36 +10,49 @@ import {
 } from "react-native";
 import React, { useRef, useState, useEffect } from "react";
 import { Video, ResizeMode } from 'expo-av';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function VideoFav({ navigation }) {
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
   const video = useRef(null);
   const [status, setStatus] = useState({});
-  const [item, setItem] = useState();
 
-  storeData = async () => {
+  const storeData = async (input) => {
     try {
-      await AsyncStorage.setItem(
-        '@MySuperStore:key',
-        'I like to save it.',
-      );
+      await AsyncStorage.setItem("input", input);
+      console.log(input)
     } catch (error) {
       // Error saving data
     }
   };
 
-  retrieveData = async () => {
+  const retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem('recientes');
+      const value = await AsyncStorage.getItem('input');
       if (value !== null) {
         // We have data!!
+        setInput(value)
         console.log(value);
       }
     } catch (error) {
       // Error retrieving data
     }
   };
+
+  useEffect(() => {
+    retrieveData() 
+  }, []);
+
+  const onPlaybackStatusUpdate = playbackStatus => {
+    if (!playbackStatus.isLoaded) {
+      // Update your UI for the unloaded state
+      if (playbackStatus.error) {
+        console.log(`Encountered a fatal error during playback: ${playbackStatus.error}`);
+        // Send Expo team the error on Slack or the forums so we can help you debug!
+      }
+    } }
+    
+
 
   return (
     <View style={styles.container}>
@@ -48,7 +61,7 @@ export default function VideoFav({ navigation }) {
         value={input}
         placeholder="Your link here"
         placeholderTextColor="#000"
-        onChangeText={(input) => setInput(input)}
+        onChangeText={(input) => {setInput(input); storeData(input); }}
       />
       <View style={styles.videoView}>
         <Video
