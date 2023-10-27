@@ -11,6 +11,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState, useEffect } from "react";
 import { ImageBackground} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Background({ navigation }) {
@@ -93,7 +94,7 @@ export default function Background({ navigation }) {
 
       </ImageBackground>
       :<ImageBackground
-      source="https://marketplace.canva.com/EAE4P0NY2WI/1/0/900w/canva-fondo-de-pantalla-con-elementos-acuarela-beige-cljowhiE46M.jpg"
+      source="https://cdn11.bigcommerce.com/s-l2xlls5oyw/images/stencil/608x608/products/30820/45500/dd0202a2-efab-46ae-8f1b-cfa45c56b8c2__54150.1661175112.jpg"
       resizeMode="cover"
       style={styles.backgroundImage}>
         <Text style={styles.texto}>
@@ -127,13 +128,12 @@ export default function Background({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFAED",
-    alignItems: "center",
     justifyContent: "center",
   },
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: "center",
   },
   button: {
     marginTop: 50,

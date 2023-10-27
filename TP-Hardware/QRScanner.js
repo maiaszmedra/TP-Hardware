@@ -75,7 +75,6 @@ export default function QRScanner({ navigation }) {
 
         {nombres ? <Text style={styles.autores}>Los autores del codigo escaneado son: {nombres}</Text>: 
         <Text style={styles.escanea}>Escanea el codigo QR</Text>}
-
       </View>
     );
   }

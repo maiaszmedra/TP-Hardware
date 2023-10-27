@@ -9,11 +9,30 @@ import {
 import React, { useRef, useState, useEffect } from "react";
 import { Video, ResizeMode } from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ImageBackground} from 'react-native';
 
 export default function VideoFav({ navigation }) {
   const [input, setInput] = useState("");
   const video = useRef(null);
   const [status, setStatus] = useState({});
+  const [image, setImage] = useState(null);
+
+  const retrieveDataBackground = async () => {
+    try {
+      const value = await AsyncStorage.getItem('image');
+      if (value !== null) {
+        // We have data!!
+        setImage(value)
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
+  useEffect(() => {
+    retrieveDataBackground() 
+  }, []);
 
   const storeData = async (input) => {
     try {
@@ -54,6 +73,11 @@ export default function VideoFav({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <ImageBackground
+        source={image}
+        resizeMode="cover"
+        style={styles.backgroundImage}>
+
       <TextInput
         style={styles.TextInput}
         value={input}
@@ -84,6 +108,7 @@ export default function VideoFav({ navigation }) {
       >
         <Text style={styles.btnText}>Go to Weather</Text>
       </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 }
@@ -91,9 +116,12 @@ export default function VideoFav({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFAED",
-    alignItems: "center",
     justifyContent: "center",
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: "center",
   },
   button: {
     marginTop: 10,
@@ -128,6 +156,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 10,
     placeholderTextColor: "gray",
+    backgroundColor: "#FFFAED",
   },
   videoView:{
     width: "80%",

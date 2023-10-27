@@ -8,6 +8,9 @@ import {
 import React, { useState, useEffect } from "react";
 import * as Location from 'expo-location';
 import axios from "axios"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ImageBackground} from 'react-native';
+
 
 export default function Clima({ navigation }) {
 const [location, setLocation] = useState(null);
@@ -15,6 +18,24 @@ const [errorMsg, setErrorMsg] = useState(null);
 const [temperature, setTemperature] = useState();
 const [ubi, setUbi] = useState();
 const [date, detDate]= useState(new Date().toLocaleString())
+const [image, setImage] = useState(null);
+
+  const retrieveDataBackground = async () => {
+    try {
+      const value = await AsyncStorage.getItem('image');
+      if (value !== null) {
+        // We have data!!
+        setImage(value)
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
+  useEffect(() => {
+    retrieveDataBackground() 
+  }, []);
 
 useEffect(() => {
     //get location
@@ -52,6 +73,10 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground
+        source={image}
+        resizeMode="cover"
+        style={styles.backgroundImage}>
       {/*<Text style={styles.paragraph}>{text}</Text>*/}
       <Text style={styles.text}> {ubi} </Text>
       <Text style={styles.text}> {date} </Text>
@@ -64,6 +89,7 @@ useEffect(() => {
       >
         <Text style={styles.btnText}>Go to About</Text>
       </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 }
@@ -71,9 +97,12 @@ useEffect(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFAED",
-    alignItems: "center",
     justifyContent: "center",
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: "center",
   },
   button: {
     marginTop: 10,
