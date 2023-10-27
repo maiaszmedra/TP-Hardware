@@ -3,13 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import QRCode from "react-qr-code";
 import * as Location from 'expo-location';
 import axios from "axios"
 
@@ -84,8 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     paddingHorizontal: 80,
-    borderRadius: 20,
-
+    borderRadius: 25,
     shadowOffset: {
       width: 3,
       height: 5,

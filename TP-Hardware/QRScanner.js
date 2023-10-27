@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Modal, Pressable} from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { CurrentRenderContext } from "@react-navigation/native";
 
 // npm install react-native-camera react-native-qrcode-scanner
 // import { RNCamera } from 'react-native-camera'
@@ -76,7 +75,6 @@ export default function QRScanner({ navigation }) {
 
         {nombres ? <Text style={styles.autores}>Los autores del codigo escaneado son: {nombres}</Text>: 
         <Text style={styles.escanea}>Escanea el codigo QR</Text>}
-       
 
       </View>
     );

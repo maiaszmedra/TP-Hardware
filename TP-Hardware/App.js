@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import About from './About.js';
 import QRScanner from './QRScanner.js';
 import Clima from './Clima.js';
+import Background from './Background.js'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -24,6 +25,10 @@ export default function App() {
   return (
       <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen 
+          name="Background" 
+          component={Background} 
+        />
         <Stack.Screen 
           name="VideoFav" 
           component={VideoFav} 

@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import React, { useRef, useState, useEffect } from "react";
@@ -102,8 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     paddingHorizontal: 80,
-    borderRadius: 20,
-
+    borderRadius: 25,
     shadowOffset: {
       width: 3,
       height: 5,
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     borderRadius: 20,
-    height: 50,
+    height: 40,
     padding: 10,
     marginBottom: 10,
     alignItems: "center",
