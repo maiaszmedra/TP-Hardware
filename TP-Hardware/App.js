@@ -4,6 +4,7 @@ import About from './About.js';
 import QRScanner from './QRScanner.js';
 import Clima from './Clima.js';
 import Background from './Background.js'
+import Camera from './Camera.js'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -28,6 +29,10 @@ export default function App() {
         <Stack.Screen 
           name="Background" 
           component={Background} 
+        />
+        <Stack.Screen 
+          name="Camera" 
+          component={Camera} 
         />
         <Stack.Screen 
           name="VideoFav" 

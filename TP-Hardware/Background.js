@@ -75,7 +75,7 @@ export default function Background({ navigation }) {
       </Text>
       <TouchableOpacity
         style={styles.button1}
-        onPress={() => { navigation.navigate('VideoFav'); }}
+        onPress={() => { navigation.navigate('Camera'); }}
       >
         <Text style={styles.btnText}>Take a photo</Text>
       </TouchableOpacity>

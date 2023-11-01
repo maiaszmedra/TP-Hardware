@@ -73,6 +73,8 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
+      {image
+      ?
       <ImageBackground
         source={image}
         resizeMode="cover"
@@ -90,6 +92,24 @@ useEffect(() => {
         <Text style={styles.btnText}>Go to About</Text>
       </TouchableOpacity>
       </ImageBackground>
+      :
+      <ImageBackground
+        source="https://cdn11.bigcommerce.com/s-l2xlls5oyw/images/stencil/608x608/products/30820/45500/dd0202a2-efab-46ae-8f1b-cfa45c56b8c2__54150.1661175112.jpg"
+        resizeMode="cover"
+        style={styles.backgroundImage}>
+      {/*<Text style={styles.paragraph}>{text}</Text>*/}
+      <Text style={styles.text}> {ubi} </Text>
+      <Text style={styles.text}> {date} </Text>
+      <Text style={styles.text}>Local temperature is {temperature} degrees</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("About");
+        }}
+      >
+        <Text style={styles.btnText}>Go to About</Text>
+      </TouchableOpacity>
+      </ImageBackground>}
     </View>
   );
 }
