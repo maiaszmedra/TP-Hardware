@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Video } from "expo-av";
+import { ImageBackground} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const closeButtonSize = Math.floor(WINDOW_HEIGHT * 0.032);
 const captureSize = Math.floor(WINDOW_HEIGHT * 0.09);
-export default function App() {
+
+export default function Camara({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isPreview, setIsPreview] = useState(false);
@@ -20,27 +23,38 @@ export default function App() {
   const [isVideoRecording, setIsVideoRecording] = useState(false);
   const [videoSource, setVideoSource] = useState(null);
   const cameraRef = useRef();
+  const [source, setSource] = useState(null);
+
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
+      const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   }, []);
+
   const onCameraReady = () => {
     setIsCameraReady(true);
   };
+
   const takePicture = async () => {
     if (cameraRef.current) {
       const options = { quality: 0.5, base64: true, skipProcessing: true };
       const data = await cameraRef.current.takePictureAsync(options);
-      const source = data.uri;
-      if (source) {
+      setSource(data.uri);
+      if (data.uri) {
         await cameraRef.current.pausePreview();
         setIsPreview(true);
-        console.log("picture source", source);
+        console.log("picture source", data.uri);
+        await AsyncStorage.setItem("image", data.uri)
       }
     }
   };
+  
+  useEffect(()=>{
+    if(source!=null){
+      navigation.navigate("Background");}
+  },[source]);
+
   const recordVideo = async () => {
     if (cameraRef.current) {
       try {
