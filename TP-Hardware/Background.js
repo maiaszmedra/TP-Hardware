@@ -91,6 +91,18 @@ export default function Background({ navigation }) {
       >
         <Text style={styles.btnText}>Watch a video!</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button2}
+        onPress={() => { navigation.navigate('Clima'); }}
+      >
+        <Text style={styles.btnText}>What's the weather?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button2}
+        onPress={() => { navigation.navigate('About'); }}
+      >
+        <Text style={styles.btnText}>Who are the authors?</Text>
+      </TouchableOpacity>
 
       </ImageBackground>
       :<ImageBackground
@@ -118,6 +130,16 @@ export default function Background({ navigation }) {
       >
         <Text style={styles.btnText}>Watch a video!</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button2}
+        onPress={() => { navigation.navigate('Clima'); }}
+      >
+        <Text style={styles.btnText}>What's the weather?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button2}
+        onPress={() => { navigation.navigate('About'); }}
+      ></TouchableOpacity>
     </ImageBackground>}
 
       
@@ -137,6 +159,20 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 50,
+    alignItems: "center",
+    padding: 15,
+    paddingHorizontal: 80,
+    borderRadius: 25,
+    shadowOffset: {
+      width: 3,
+      height: 5,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    backgroundColor: "#4C5760",
+  },
+  button2: {
+    marginTop: 10,
     alignItems: "center",
     padding: 15,
     paddingHorizontal: 80,
